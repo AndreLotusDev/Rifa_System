@@ -12,6 +12,7 @@ cpf_temp = ''
 name_temp = ''
 number_selected = ''
 
+
 ##Fim da lista de variaveis
 
 # lista de funcoes
@@ -19,8 +20,10 @@ number_selected = ''
 def printLine():
     print("=======================================")
 
+
 def print_point_line():
     print("-------------------------")
+
 
 def cpfcall():  ##Verifica se o cpf é um numero
 
@@ -51,7 +54,7 @@ def cpfcall():  ##Verifica se o cpf é um numero
                 chose_inscribe_or_not = input("S/N? ->")
                 printLine()
 
-                if(chose_inscribe_or_not == 'N' or chose_inscribe_or_not == 'n'):
+                if (chose_inscribe_or_not == 'N' or chose_inscribe_or_not == 'n'):
                     cpfcall()
 
     run_all_coluns()
@@ -89,38 +92,42 @@ def numbercall():
     number_selected.translate({ord(c): None for c in string.whitespace})  # deleta os espaços em branco
     print_point_line()
 
-def add_client_info(Nome, CPF, NumberSelected): ## Insere as informações no Excel
+
+def add_client_info(Nome, CPF, NumberSelected):  ## Insere as informações no Excel
     workbook = op.load_workbook('clientes_db.xlsx')
-    woorksheet = workbook.get_sheet_by_name('DataBase_Clients') #aqui é o nome da pasta dentro do excel
+    woorksheet = workbook.get_sheet_by_name('DataBase_Clients')  # aqui é o nome da pasta dentro do excel
     woorksheet.append([Nome, CPF, NumberSelected])
     workbook.save('clientes_db.xlsx')
     workbook.close()
-##Fim da lista de funcoes
 
-## Main()
+
+##Fim da lista de funcoes
 
 printLine()
 print("\tBem vindo ao cadastro de cliente")
 printLine()
+
 
 def all_client_info_function():
     cpfcall()  # Chama a funcao do cadastro de CPF
     namecall()  # Chama a funcao do cadastro de nome
     numbercall()  # chama a funcao do cadastro do numero de sorteio
 
-    add_client_info(name_temp, cpf_temp, number_selected) ##chama o arquivo excel juntamente com a funcao
+    add_client_info(name_temp, cpf_temp, number_selected)  ##chama o arquivo excel juntamente com a funcao
+
 
 all_client_info_function()
 
-def recursive_add_new_cliente():
 
+def recursive_add_new_cliente():
     choices = input("\tDeseja cadastrar novamente? S/N ->")
     print_point_line()
 
-    if(choices == 'S' or choices == 's'):
+    if (choices == 'S' or choices == 's'):
         all_client_info_function()
         recursive_add_new_cliente()
     if (choices == 'N' or choices == 'n'):
         clients.clientFunc()
+
+
 recursive_add_new_cliente()
-quit()
